@@ -63,19 +63,19 @@ This document provides guidance for Claude AI when working on GlobPretect - a VP
 ### MacBook owner@owner
 ```bash
 ssh-keygen -t ed25519 -C "sweeden@ttu.edu" -f ~/projects/GlobPretect/id_ed25519_sweeden
-# Passphrase: Quantum8Bridge (one-time)
+# Passphrase:  
 ```
 
 ### Rocky quay sdw3098
 ```bash
 ssh-keygen -t ed25519 -C "sweeden@ttu.edu" -f $HOME/projects/GlobPretect/id_ed25519_sweeden
-# Passphrase: Quantum8Bridge (one-time)
+# Passphrase: 
 ```
 
 ### Copy to HPCC
 ```bash
 ssh-copy-id -i ~/projects/GlobPretect/id_ed25519_sweeden.pub sweeden@login.hpcc.ttu.edu
-# Password: Quantum8Bridge (one-time)
+# Password:  (one-time)
 ```
 
 ## API Keys File

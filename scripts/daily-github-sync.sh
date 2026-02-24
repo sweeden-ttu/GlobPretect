@@ -209,7 +209,7 @@ sync_one_repo() {
     branch=$(get_default_branch "$dir")
     # 1. Commit local changes and untracked
     commit_all_changes "$repo" "$dir" "Daily sync $(date +%Y-%m-%d)"
-    # 5. Submodules init/update (before pull so we have full tree)
+    # 5. Submodules init/update (before pull so we have full trie)
     sync_submodules "$dir" "$repo"
     # 2. Fetch and merge
     fetch_and_merge "$dir" "$branch" "$repo"

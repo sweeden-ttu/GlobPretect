@@ -1,0 +1,25 @@
+{
+  "blooming_directed_graph_filter_agents": [
+    { "id": "ruby", "name": "Ruby filter agent", "role": "language", "filter_criteria": { "language": "ruby" } },
+    { "id": "typescript", "name": "TypeScript filter agent", "role": "language", "filter_criteria": { "language": "typescript" } },
+    { "id": "python", "name": "Python filter agent", "role": "language", "filter_criteria": { "language": "python" } },
+    { "id": "csharp", "name": "C# filter agent", "role": "language", "filter_criteria": { "language": "csharp" } },
+    { "id": "java", "name": "Java filter agent", "role": "language", "filter_criteria": { "language": "java" } },
+    { "id": "bash", "name": "Bash filter agent", "role": "shell", "filter_criteria": { "shell": "bash" } },
+    { "id": "zsh", "name": "Zsh filter agent", "role": "shell", "filter_criteria": { "shell": "zsh" } },
+    { "id": "git", "name": "Git filter agent", "role": "vcs", "filter_criteria": { "vcs": "git" } },
+    { "id": "github", "name": "GitHub filter agent", "role": "cluster", "filter_criteria": { "action_where": "github" } },
+    { "id": "hpcc", "name": "HPCC filter agent", "role": "cluster", "filter_criteria": { "action_where": "hpcc" } }
+  ],
+  "blooming_directed_graph_trigger_process_agent": {
+    "id": "trigger_process_agent",
+    "name": "Blooming-directed-graph trigger process agent",
+    "description": "Triggers the appropriate process across languages, projects, repositories, clusters, and models.",
+    "inputs": ["context_key", "language", "project", "repository", "cluster", "model"],
+    "actions": {
+      "github": "workflow_dispatch or sync to GitHub",
+      "hpcc": "submit job or run on HPCC cluster",
+      "local": "run script (bash/zsh) for macbook or rockydesktop"
+    }
+  }
+}

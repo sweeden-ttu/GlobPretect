@@ -10,8 +10,15 @@ class VPNManager:
     PORTS = {"granite": 55077, "think": 55088, "qwen": 66044, "code": 66033}
 
     def __init__(self):
-        self.ssh_key = os.path.expanduser("~/projects/GlobPretect/id_ed25519_sweeden")
-        self.hpcc_host = "sweeden@login.hpcc.ttu.edu"
+        # SSH key: four factors - user, machine, remote_cluster, remote_user (~/.ssh only)
+        user = os.environ.get("USER", "unknown")
+        machine = (socket.gethostname() or "").split(".")[0] or "unknown"
+        remote_cluster = "hpcc"
+        remote_user = "sweeden"
+        self.ssh_key = os.path.expanduser(
+            f"~/.ssh/id_ed25519_{user}_{machine}_{remote_cluster}_{remote_user}"
+        )
+        self.hpcc_host = f"{remote_user}@login.hpcc.ttu.edu"
 
     def check_port(self, port: int, host: str = "127.0.0.1") -> bool:
         """Check if a port is accessible."""

@@ -1,6 +1,6 @@
 # CLAUDE.md - GlobPretect VPN Development Guide
 
-This document provides guidance for Claude AI when working on GlobPretect - a VPN connection manager and router for secure access to TTU HPCC (RedRaider) and local Ollama services.
+This document provides guidance for Claude AI when working on GlobPretect - a VPN connection manager and router for secure access to TTU HPCC (RedRaider) and local Ollama services. Commit messages mention **@claude** (with @cursor @gemini @actions-user) for CI/CD review; see **docs/COMMIT_MESSAGE_STANDARD.md**.
 
 ## Project Overview
 

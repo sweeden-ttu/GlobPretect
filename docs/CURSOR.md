@@ -1,6 +1,6 @@
 # CURSOR.md - Cursor IDE Configuration Guide
 
-This document provides Cursor IDE configuration, skillsets, rulesets, and GitHub integration for this project.
+This document provides Cursor IDE configuration, skillsets, rulesets, and GitHub integration for this project. Commit messages mention **@cursor** (with @gemini @claude @actions-user) for CI/CD review; see **docs/COMMIT_MESSAGE_STANDARD.md**.
 
 ## Project Repositories
 

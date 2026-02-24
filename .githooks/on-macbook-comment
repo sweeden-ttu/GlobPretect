@@ -1,0 +1,9 @@
+#!/bin/sh
+# Handler run when @macbook or @rockydesktop is found in merged commit messages (fetch_and_merge).
+# Customize this script per repo. Args: $1 = repo root, $2 = merged commit messages (stdin also available).
+REPO_ROOT="${1:-.}"
+# Example: notify, run a local sync, or update a dashboard.
+echo "[on-macbook-comment] Repo: $REPO_ROOT — comments for @macbook received."
+# Uncomment to run daily-github-sync from project root:
+# [ -x "$REPO_ROOT/scripts/daily-github-sync.sh" ] && "$REPO_ROOT/scripts/daily-github-sync.sh" sync
+exit 0

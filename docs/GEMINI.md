@@ -1,6 +1,6 @@
 # GEMINI.md - Gemini AI Development Guide
 
-This document provides guidance for Gemini AI when working on GlobPretect.
+This document provides guidance for Gemini AI when working on GlobPretect. Commit messages mention **@gemini** (with @cursor @claude @actions-user) for CI/CD review; see **docs/COMMIT_MESSAGE_STANDARD.md**.
 
 ## Project Context
 

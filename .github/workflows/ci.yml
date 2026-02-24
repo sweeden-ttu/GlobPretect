@@ -1,0 +1,43 @@
+# CI/CD for GlobPretect – runs on push/PR; references AGENTS.md for @actions-user.
+# Reuse or copy this workflow to other projects; adjust steps per repo (lint, test, build).
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  # @actions-user @github-actions: agent responsibilities per AGENTS.md
+  lint-and-docs:
+    name: Lint & docs check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check AGENTS.md exists
+        run: test -f docs/AGENTS.md || test -f AGENTS.md || true
+
+      - name: Check CURSOR.md / GEMINI.md / CLAUDE.md
+        run: |
+          for f in docs/CURSOR.md docs/GEMINI.md docs/CLAUDE.md; do
+            test -f "$f" && echo "Found $f" || true
+          done
+
+      - name: ShellCheck scripts (if available)
+        run: |
+          if command -v shellcheck >/dev/null 2>&1; then
+            for f in scripts/*.sh; do [ -f "$f" ] && shellcheck "$f" || true; done
+          else
+            echo "ShellCheck not installed; skip"
+          fi
+
+  # Optional: add job for @hpcc-gpu / @hpcc-cpu when repo has Slurm/HPCC config
+  # hpcc-job-validate:
+  #   name: Validate HPCC job configs
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Check Slurm scripts
+  #       run: find . -name '*.sh' -path '*hpcc*' -o -name '*.job' 2>/dev/null | head -20

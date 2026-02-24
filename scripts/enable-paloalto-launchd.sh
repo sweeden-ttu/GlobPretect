@@ -4,14 +4,29 @@
 # background and load at startup. Uses launchctl (not sfltool — sfltool has no
 # command to enable specific BTM items).
 #
+# Accepts one of the 20 context keys (CONTEXT_KEY or first arg). Decision: only run when CONTEXT_ORIGIN is owner (macOS); quay/hpcc no-op.
 # Prerequisite: In System Settings > General > Login Items > Allow in the
 # Background, the three Palo Alto Networks items must be turned ON at least once.
-# Otherwise BTM policy may block launchd from loading them.
 #
-# Usage: ./enable-paloalto-launchd.sh
-#        sudo ./enable-paloalto-launchd.sh  (needed for the daemon)
+# Usage: ./enable-paloalto-launchd.sh <context_key>   or   CONTEXT_KEY=<key> ./enable-paloalto-launchd.sh
+#        sudo ./enable-paloalto-launchd.sh <key>  (needed for the daemon)
 
 set -e
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CONTEXT_KEY="${1:-$CONTEXT_KEY}"
+# shellcheck source=./context-key.sh
+source "$SCRIPT_DIR/context-key.sh"
+context_key_require
+# Decision: only enable on macOS (owner). quay = Rocky (no Palo Alto here); hpcc = not applicable.
+if [[ "$CONTEXT_ORIGIN" == "quay" ]]; then
+    echo "[enable-paloalto] Key $CONTEXT_KEY: quay (Rocky); Palo Alto VPN is macOS-only. No-op."
+    exit 0
+fi
+if [[ "$CONTEXT_ORIGIN" == "hpcc" ]]; then
+    echo "[enable-paloalto] Key $CONTEXT_KEY: hpcc; not applicable on HPCC. No-op."
+    exit 0
+fi
 
 DAEMON_PLIST="/Library/LaunchDaemons/com.paloaltonetworks.gp.pangpsd.plist"
 AGENT_PANGPS="/Library/LaunchAgents/com.paloaltonetworks.gp.pangps.plist"

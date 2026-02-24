@@ -1,16 +1,21 @@
 #!/bin/bash
 # install-git-hooks-all-repos.sh – set up post-merge and on-macbook-comment hooks for every repo under PROJECTS_DIR.
 #
+# Accepts one of the 20 context keys (CONTEXT_KEY or first arg). Decision: run for any key (all repos get hooks).
 # Used for fetch_and_merge: after `git merge`, the post-merge hook runs and, if @macbook or @rockydesktop
 # appears in merged commit messages, runs on-macbook-comment. See docs/GIT_HOOKS.md.
 #
 # Usage:
-#   PROJECTS_DIR=/path/to/workspace ./install-git-hooks-all-repos.sh   # default PROJECTS_DIR = $HOME/projects
-#   ./install-git-hooks-all-repos.sh
+#   ./install-git-hooks-all-repos.sh <context_key>   or   CONTEXT_KEY=<key> ./install-git-hooks-all-repos.sh
+#   PROJECTS_DIR=/path/to/workspace ./install-git-hooks-all-repos.sh <key>
 
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CONTEXT_KEY="${1:-$CONTEXT_KEY}"
+# shellcheck source=./context-key.sh
+source "$SCRIPT_DIR/context-key.sh"
+context_key_require
 # Shared hooks: .githooks in the repo that contains this script (e.g. GlobPretect)
 GITHOOKS_SOURCE="${GITHOOKS_SOURCE:-$SCRIPT_DIR/../.githooks}"
 GITHOOKS_SOURCE="$(cd "$GITHOOKS_SOURCE" 2>/dev/null && pwd)" || true
@@ -45,4 +50,4 @@ for repo in "${REPOS[@]}"; do
     fi
 done
 
-echo "Git hooks installed for ${#REPOS[@]} repo(s). Post-merge (and on-macbook-comment) will run after fetch_and_merge. See docs/GIT_HOOKS.md."
+echo "Git hooks installed for ${#REPOS[@]} repo(s) (context key: $CONTEXT_KEY). Post-merge (and on-macbook-comment) will run after fetch_and_merge. See docs/GIT_HOOKS.md."

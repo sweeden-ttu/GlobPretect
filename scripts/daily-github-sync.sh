@@ -1,8 +1,8 @@
 #!/bin/bash
 # daily-github-sync.sh - Sync all projects under PROJECTS_DIR with GitHub
 #
-# Uses SSH key: owner_owner_sweeden-ttu_github (~/.ssh/id_ed25519_owner_owner_sweeden-ttu_github)
-# Run once: gh auth setup-git (use SSH by default across all projects)
+# Accepts one of the 20 context keys (CONTEXT_KEY or first arg). Decision: only run sync when key receiver is GitHub (*_github_*).
+# SSH key is chosen from the key (owner_github, quay_github, or hpcc_github). Run once: gh auth setup-git
 #
 # Steps per repo (and recursively for submodules):
 #   1. Commit unsaved changes; add untracked files
@@ -14,8 +14,26 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-# Optional: source ssh-key-standard for dynamic key; here we pin to owner_owner_sweeden-ttu_github
-GITHUB_SSH_KEY_IDENTIFIER="${GITHUB_SSH_KEY_IDENTIFIER:-owner_owner_sweeden-ttu_github}"
+# For sync: CONTEXT_KEY = second arg or env. For setup/install-hooks: optional key for context.
+CONTEXT_KEY="${2:-$CONTEXT_KEY}"
+if [[ "${1:-sync}" == "sync" ]]; then
+    # shellcheck source=./context-key.sh
+    source "$SCRIPT_DIR/context-key.sh"
+    context_key_require
+    # Decision: only sync to GitHub when key receiver is github
+    if [[ "$CONTEXT_RECEIVER" != "github" ]]; then
+        echo "Key $CONTEXT_KEY has receiver $CONTEXT_RECEIVER; daily-github-sync is for GitHub only. Use a *_github_* key." >&2
+        exit 1
+    fi
+    GITHUB_SSH_KEY_IDENTIFIER="${SSH_KEY_IDENTIFIER}"
+else
+    # setup | install-hooks: key optional; default SSH key for GitHub
+    if [[ -n "$CONTEXT_KEY" ]] && [[ -f "$SCRIPT_DIR/context-key.sh" ]]; then
+        source "$SCRIPT_DIR/context-key.sh"
+        context_key_valid "$CONTEXT_KEY" 2>/dev/null && context_key_parse "$CONTEXT_KEY" 2>/dev/null && GITHUB_SSH_KEY_IDENTIFIER="${SSH_KEY_IDENTIFIER}" || true
+    fi
+    GITHUB_SSH_KEY_IDENTIFIER="${GITHUB_SSH_KEY_IDENTIFIER:-owner_owner_sweeden-ttu_github}"
+fi
 SSH_KEY="$HOME/.ssh/id_ed25519_${GITHUB_SSH_KEY_IDENTIFIER}"
 export GIT_SSH_COMMAND="ssh -i \"$SSH_KEY\" -o IdentitiesOnly=yes"
 
@@ -230,10 +248,13 @@ case "${1:-sync}" in
     sync)   main ;;
     setup)  setup_gh_git; configure_git; log_info "Run 'gh auth login' and 'gh auth setup-git' if needed." ;;
     install-hooks)
-        PROJECTS_DIR="$PROJECTS_DIR" "$SCRIPT_DIR/install-git-hooks-all-repos.sh"
+        CONTEXT_KEY="$CONTEXT_KEY" PROJECTS_DIR="$PROJECTS_DIR" "$SCRIPT_DIR/install-git-hooks-all-repos.sh" "$CONTEXT_KEY"
         ;;
     *)
-        echo "Usage: $0 {sync|setup|install-hooks}"
+        echo "Usage: $0 sync <context_key>   # key = one of 20 (e.g. owner_github_granite); receiver must be github"
+        echo "       $0 setup [context_key]"
+        echo "       $0 install-hooks [context_key]"
+        echo "       CONTEXT_KEY=<key> $0 sync"
         exit 1
         ;;
 esac

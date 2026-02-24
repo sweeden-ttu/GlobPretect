@@ -1,17 +1,22 @@
 #!/bin/bash
 # ssh-key-standard.sh - Standard SSH key naming and HPCC context (source this in other scripts)
 #
-# SSH key identity is ALWAYS named using FOUR factors (stored in ~/.ssh, never in project):
-#   1. Current logged-in user ($USER) - must NOT be root
-#   2. Current machine name ($HOSTNAME) - must NOT be the remote cluster name
-#   3. Remote cluster name: "hpcc" (login.hpcc.ttu.edu) or "github" (github.com)
-#   4. Remote username: "sweeden" (hpcc) or "sweeden-ttu" (github)
+# Accepts one of the 20 context keys (CONTEXT_KEY or $1). Decisions (key, SSH key path) are made from the key.
+# SSH key identity: ~/.ssh/id_ed25519_${SSH_KEY_IDENTIFIER} when using context key; else four factors below.
 #
+# Four factors (when not using context key): USER, HOSTNAME, remote cluster (hpcc|github), remote user.
 # Key path: ~/.ssh/id_ed25519_${USER}_${HOSTNAME}_${REMOTE_CLUSTER}_${REMOTE_USER}
 #
-# When hostname matches login*, gpu*-*, or cpu*-* (e.g. login20-2, gpu2-12, cpu8-1),
-# the current machine is already on the HPCC cluster. When hostname begins with "login",
+# When hostname matches login*, gpu*-*, or cpu*-*, current machine is on HPCC; when hostname begins with "login",
 # one more step is required to reserve compute resources (interactive or non-interactive).
+
+SCRIPT_DIR_SSH="$(cd "$(dirname "${BASH_SOURCE[0]:-.}")" 2>/dev/null && pwd)"
+# Optional: if CONTEXT_KEY is set, parse it so SSH_KEY_IDENTIFIER is available for ssh_std_set_key
+if [[ -n "${CONTEXT_KEY:-}" ]] && [[ -f "${SCRIPT_DIR_SSH}/context-key.sh" ]]; then
+    # shellcheck source=./context-key.sh
+    source "${SCRIPT_DIR_SSH}/context-key.sh"
+    context_key_valid "$CONTEXT_KEY" 2>/dev/null && context_key_parse "$CONTEXT_KEY" 2>/dev/null || true
+fi
 
 # Normalize hostname (short name, no domain)
 _ssh_std_hostname="${HOSTNAME%%.*}"
@@ -28,13 +33,26 @@ ssh_std_on_hpcc_login() {
     [[ "$_ssh_std_hostname" == login* ]]
 }
 
-# Set SSH key path for a given remote. Usage: ssh_std_set_key "hpcc" | "github"
+# Set SSH key path: from context key (if CONTEXT_KEY/SSH_KEY_IDENTIFIER set) or from remote "hpcc"|"github".
+# Usage: ssh_std_set_key "hpcc" | "github"   OR   ensure CONTEXT_KEY is set and call ssh_std_set_key_from_context
 # Exports: SSH_KEY, REMOTE_USER, REMOTE_CLUSTER
 ssh_std_set_key() {
     local remote_cluster="${1:-hpcc}"
     if [[ "$(id -u)" -eq 0 ]]; then
         echo "Error: Do not run as root. SSH key identity requires a non-root user." >&2
         return 1
+    fi
+    if [[ -n "${SSH_KEY_IDENTIFIER:-}" ]]; then
+        export SSH_KEY="$HOME/.ssh/id_ed25519_${SSH_KEY_IDENTIFIER}"
+        if [[ "$CONTEXT_RECEIVER" == "hpcc" ]]; then
+            REMOTE_CLUSTER="hpcc"
+            REMOTE_USER="sweeden"
+        else
+            REMOTE_CLUSTER="github"
+            REMOTE_USER="sweeden-ttu"
+        fi
+        export REMOTE_CLUSTER REMOTE_USER
+        return 0
     fi
     if [[ "$remote_cluster" == "hpcc" ]]; then
         REMOTE_CLUSTER="hpcc"
@@ -46,9 +64,24 @@ ssh_std_set_key() {
         echo "Error: remote_cluster must be 'hpcc' or 'github'" >&2
         return 1
     fi
-    # Current machine name must not be used as remote cluster identifier
     export REMOTE_CLUSTER REMOTE_USER
     export SSH_KEY="$HOME/.ssh/id_ed25519_${USER}_${_ssh_std_hostname}_${REMOTE_CLUSTER}_${REMOTE_USER}"
+}
+
+# Set SSH key from current CONTEXT_KEY (must be set and parsed already). Exports SSH_KEY, REMOTE_*.
+ssh_std_set_key_from_context() {
+    if [[ -z "${CONTEXT_KEY:-}" ]]; then
+        echo "Error: CONTEXT_KEY must be set before ssh_std_set_key_from_context" >&2
+        return 1
+    fi
+    export SSH_KEY="$HOME/.ssh/id_ed25519_${SSH_KEY_IDENTIFIER}"
+    if [[ "$CONTEXT_RECEIVER" == "hpcc" ]]; then
+        export REMOTE_CLUSTER="hpcc"
+        export REMOTE_USER="sweeden"
+    else
+        export REMOTE_CLUSTER="github"
+        export REMOTE_USER="sweeden-ttu"
+    fi
 }
 
 # HPCC: reserve resources when on login node (interactive). Call after detecting login* hostname.

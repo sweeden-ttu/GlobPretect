@@ -2,9 +2,25 @@
 # disable-paloalto-launchd.sh
 # Unload the three Palo Alto Networks / GlobalProtect launchd jobs (mirroring
 # enable-paloalto-launchd.sh but with launchctl bootout) and reset BTM so they
-# stay disabled. Assume this script is run as root.
+# stay disabled.
 #
-# Usage: run as root (e.g. ./disable-paloalto-launchd.sh when already root)
+# Accepts one of the 20 context keys (CONTEXT_KEY or first arg). Decision: only run when CONTEXT_ORIGIN is owner (macOS); quay/hpcc no-op.
+# Usage: run as root: ./disable-paloalto-launchd.sh <context_key>   or   CONTEXT_KEY=<key> ./disable-paloalto-launchd.sh
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CONTEXT_KEY="${1:-$CONTEXT_KEY}"
+# shellcheck source=./context-key.sh
+source "$SCRIPT_DIR/context-key.sh"
+context_key_require
+# Decision: only disable on macOS (owner). quay/hpcc no-op.
+if [[ "$CONTEXT_ORIGIN" == "quay" ]]; then
+    echo "[disable-paloalto] Key $CONTEXT_KEY: quay (Rocky); Palo Alto VPN is macOS-only. No-op."
+    exit 0
+fi
+if [[ "$CONTEXT_ORIGIN" == "hpcc" ]]; then
+    echo "[disable-paloalto] Key $CONTEXT_KEY: hpcc; not applicable on HPCC. No-op."
+    exit 0
+fi
 
 DAEMON_PLIST="/Library/LaunchDaemons/com.paloaltonetworks.gp.pangpsd.plist"
 AGENT_PANGPS="/Library/LaunchAgents/com.paloaltonetworks.gp.pangps.plist"

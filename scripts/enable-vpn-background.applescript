@@ -1,9 +1,19 @@
 -- enable-vpn-background.applescript
 -- Enables the three Palo Alto Networks "Allow in the Background" items in
 -- System Settings > General > Login Items so the VPN can run in the background.
+-- Accepts one of the 20 context keys as first argument. Decision: only run when key starts with "owner_" (macOS).
 -- Use with macOS Shortcuts for a one-tap "Enable VPN" shortcut.
+-- Usage: osascript enable-vpn-background.applescript [owner_hpcc_granite]
 
-on run
+on run argv
+	set contextKey to ""
+	if (count of argv) > 0 then
+		set contextKey to item 1 of argv
+	end if
+	if contextKey is not "" and not (contextKey starts with "owner_") then
+		display alert "VPN (macOS only)" message "Context key «" & contextKey & "» is not owner_* (macOS). Enable VPN is only for owner keys. No-op." as warning
+		return
+	end if
 	set success to false
 	try
 		-- Open System Settings to Login Items (General > Login Items)

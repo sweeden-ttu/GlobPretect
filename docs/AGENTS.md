@@ -72,6 +72,15 @@ Scripts source `scripts/ssh-key-standard.sh` for consistent key paths and HPCC c
 
 There are 5 SSH_KEY_IDENTIFIERs × 4 OLLAMA_MODEL_IDENTIFIERs = **20 unique context keys** that always identify context, sender, and receiver. See **docs/CONTEXT_KEYS.md** for the full list and naming scheme (e.g. `owner_hpcc_granite`, `quay_github_qwen`). End-to-end flow (origin → github-actions → HPCC → Ollama → @actions-user → comments with @macbook/@rockydesktop) and git hooks for fetch_and_merge: **docs/LANGFLOW_STATE_DIAGRAM.md**, **docs/GIT_HOOKS.md**.
 
+### Where the action runs (from the key)
+
+- **github** in the key → action is taken by the **GitHub workflow action agent** (this CI, @actions-user, comments, releases).
+- **hpcc** in the key → action is taken **at the HPCC cluster** (jobs, Ollama, compute).
+- **owner** (origin) → action can be taken **locally on macbook** (@macos @maclaptop).
+- **quay** (origin) → action can be taken **locally on rockydesktop** (@rockylinux @rockydesktop).
+
+Scripts use `CONTEXT_ACTION_WHERE` (github | hpcc) and `CONTEXT_ACTION_CLIENT` (macbook | rockydesktop) from **scripts/context-key.sh**; see **docs/CONTEXT_KEYS.md**.
+
 ## HPCC: When Already on Cluster (login*, gpu*-*, cpu*-*)
 
 When hostname matches `login*`, `gpu*-*`, or `cpu*-*` (e.g. login20-2, gpu2-12, cpu8-1), the machine is already on the HPCC cluster. When hostname **begins with "login"**, one more step is required to reserve compute resources:

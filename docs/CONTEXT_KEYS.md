@@ -57,9 +57,28 @@ So each of the 20 keys is **unique** and encodes:
 | 19 | quay_github_qwen | quay_sdw3098_sweeden-ttu_github | sdw3098@quay | GitHub | @qwen |
 | 20 | quay_github_codellama | quay_sdw3098_sweeden-ttu_github | sdw3098@quay | GitHub | @codellama |
 
+## Where the action runs (from the key)
+
+From the key you can decide **who performs the action**:
+
+| Key contains | Action is taken by / at |
+|--------------|-------------------------|
+| **github**   | **GitHub workflow action agent** (CI, push, comments, releases) |
+| **hpcc**     | **HPCC cluster** (jobs, Ollama, compute) |
+| **owner** (origin) | **Local client: macbook** (@macos @maclaptop) |
+| **quay** (origin)  | **Local client: rockydesktop** (@rockylinux @rockydesktop) |
+
+Parsed by `context-key.sh` and exported for scripts:
+
+- **CONTEXT_ACTION_WHERE** = `github` \| `hpcc` — where the automated action runs (GitHub Actions or HPCC).
+- **CONTEXT_ACTION_CLIENT** = `macbook` \| `rockydesktop` \| `` — which local client the key refers to (owner → macbook, quay → rockydesktop).
+
+So: keys with **github** → action by the GitHub workflow/actions agent; keys with **hpcc** → action at the HPCC cluster; keys with **owner** or **quay** identify the local client (macbook or rockydesktop) where actions can be taken locally.
+
 ## Usage
 
 - **Config / env:** Set `CONTEXT_KEY=owner_hpcc_granite` (or one of the 20) so scripts know sender, receiver, and model.
+- **Scripts:** All scripts under `scripts/` accept one of the 20 keys as first argument or via `CONTEXT_KEY`; they then make decisions (e.g. connect-hpcc only for *_hpcc_* keys, daily-github-sync only for *_github_* keys). See `scripts/context-key.sh` and each script’s header.
 - **Git messages / notifications:** Reference the key so reviewers know context, e.g. `Context: owner_hpcc_granite` or `Key: quay_github_qwen`.
 - **Ollama jobs:** Use the key to select both the SSH path (who pushes/runs) and the model (e.g. @granite on owner→HPCC = owner_hpcc_granite).
 

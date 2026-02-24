@@ -1,4 +1,5 @@
 # CI/CD for GlobPretect – runs on push/PR; references AGENTS.md for @actions-user.
+# Whenever the context key contains "github", the action is taken by this GitHub workflow action agent.
 # Reuse or copy this workflow to other projects; adjust steps per repo (lint, test, build).
 name: CI
 
@@ -9,7 +10,7 @@ on:
     branches: [main, master]
 
 jobs:
-  # @actions-user @github-actions: agent responsibilities per AGENTS.md
+  # @actions-user @github-actions: agent responsibilities per AGENTS.md (CONTEXT_ACTION_WHERE=github)
   lint-and-docs:
     name: Lint & docs check
     runs-on: ubuntu-latest

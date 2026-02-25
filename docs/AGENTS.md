@@ -124,7 +124,6 @@ When hostname matches `login*`, `gpu*-*`, or `cpu*-*` (e.g. login20-2, gpu2-12, 
 
 ## Fixed Ports (Testing – Middle Digit +2 runs on RockyLinux)
 
-## Fixed Ports (Ready for Release)
 | Port | Service | Model |
 |------|---------|-------|
 | 55277 | Ollama | granite |
@@ -134,13 +133,14 @@ When hostname matches `login*`, `gpu*-*`, or `cpu*-*` (e.g. login20-2, gpu2-12, 
 
 ## Fixed Ports (Release – Middle Digit +3 runs on RockyLinux/MacOS)
 
-## Fixed Ports (Ready for Release)
 | Port | Service | Model |
 |------|---------|-------|
 | 55377 | Ollama | granite |
 | 55388 | Ollama | deepseek |
 | 66344 | Ollama | qwen-coder |
 | 66333 | Ollama | codellama |
+
+**GitHub workflow actions:** Workflows that dispatch work by model key (**@granite**, **@deepseek**, **@qwen-coder**, **@codellama**) must call the Ollama API on the port for that model in the appropriate environment (Debug / Testing +1 / Testing +2 / Release above). Use the same mapping in all Ollama-related projects (OllamaHpcc, ollama-rocky, ollama-podman, ollama-mac, ollama-hpcc, langflow-ollama-podman).
 
 ## Rocky Linux 10 Best Practices
 Until the release number of GlobPretect reaches "2.0" use the release number of this repository to set the middle number of the port ranges.

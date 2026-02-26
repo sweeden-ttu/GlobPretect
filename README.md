@@ -1,4 +1,18 @@
 # Key Executables and Components (For X-Code project)
+
+## Ollama port mapping (canonical)
+
+Same mapping across GlobPretect and all Ollama projects (OllamaHpcc, ollama-rocky, ollama-podman, ollama-mac, ollama-hpcc, langflow-ollama-podman). Workflows that use **@granite**, **@deepseek**, **@qwen-coder**, or **@codellama** call Ollama on the port for that model and environment.
+
+| Environment        | granite | deepseek | qwen-coder | codellama |
+|--------------------|---------|----------|------------|-----------|
+| Debug (VPN)        | 55077   | 55088    | 66044      | 66033     |
+| Testing +1 (macOS) | 55177   | 55188    | 66144      | 66133     |
+| Testing +2 (Rocky) | 55277   | 55288    | 66244      | 66233     |
+| Release +3        | 55377   | 55388    | 66344      | 66333     |
+
+See **docs/AGENTS.md** for details.
+
 | Path | Size | Description
 |------|------|----------------
 | GlobalPretect | 13 MB | Main GUI app

@@ -54,5 +54,6 @@ credentials.json
 *.pem
 
 # SSH keys (keep in ~/.ssh; key name = id_ed25519_${USER}_${HOSTNAME}_${REMOTE})
-id_ed25519*
+id_ed*
 *.pub
+*.pkg

@@ -1,0 +1,279 @@
+#!/bin/sh
+
+out_dir="/Library/Logs/PaloAltoNetworks/GlobalProtect"
+appDir="/Applications/GlobalProtect.app"
+GP_INFO_PLIST="/Applications/GlobalProtect.app/Contents/Info.plist"
+GP_PREF_PLIST="/Library/Preferences/com.paloaltonetworks.GlobalProtect.client.plist"
+
+mkdir -p ${out_dir}
+
+((
+    pan_info()
+    {
+        curtime=`date`
+        echo $curtime " " $1 >> ${out_dir}/PanGPInstall.log
+    }
+
+    checkAndWaitProcess()
+    {
+        if [[ "$2" ]]; then
+            T="$2"
+        else
+            T=5
+        fi
+
+        C=0
+        while [[ C -lt $T ]] &&
+              ( killall -s "$1" >/dev/null 2>/dev/null )
+        do
+            let C=C+1
+            sleep 1
+        done
+
+        killall -s $1 >/dev/null 2>/dev/null
+        return $?
+    }
+
+    check_gp_status()
+    {
+        gp_status=0
+        ps aux | grep "/Applications/GlobalProtect.app/Contents/Resources/PanGPS" | grep -v grep
+        if [ $? -eq 0 ]; then
+            pan_info "PanGPS is still running"
+            gp_status=1
+        fi
+
+        ps aux | grep "/Applications/GlobalProtect.app/Contents/MacOS/GlobalProtect" | grep -v grep
+        if [ $? -eq 0 ]; then
+            pan_info "GlobalProtect is still running"
+            gp_status=1
+        fi
+    }
+
+    check_kext_status()
+    {
+        kexts_status=0
+        kextstat -b com.paloaltonetworks.kext.pangpd | grep com.paloaltonetworks.kext.pangpd | grep -v grep
+        if [ $? -eq 0 ]; then
+            pan_info "pangpd is still loaded"
+            kexts_status=1
+        fi
+
+        kextstat -b com.paloaltonetworks.GlobalProtect.gpsplit | grep com.paloaltonetworks.GlobalProtect.gpsplit | grep -v grep
+        if [ $? -eq 0 ]; then
+            pan_info "split-tunnel is still loaded"
+            kexts_status=1
+        fi
+
+        kextstat -b com.paloaltonetworks.GlobalProtect.gplock | grep com.paloaltonetworks.GlobalProtect.gplock | grep -v grep
+        if [ $? -eq 0 ]; then
+            pan_info "enforcer is still loaded"
+            kexts_status=1
+        fi
+    }
+
+    wait_and_check_running_gp()
+    {
+        #wait for 15 sec. while PanGPS quits
+        if checkAndWaitProcess "PanGPS" 20; then
+            pan_info "PanGPS didn't quit within 20 sec. Killing"
+            killall -15 PanGPS
+            if checkAndWaitProcess "PanGPS" 10; then
+                pan_info "PanGPS didn't quit after SIGTERM within 10 sec."
+            fi
+        fi
+
+        #wait for 5 sec. while GlobalProtect quits
+        if checkAndWaitProcess "GlobalProtect" 10; then
+            pan_info "GlobalProtect didn't quit within 10 sec. Killing"
+            killall -15 GlobalProtect
+            if checkAndWaitProcess "GlobalProtect" 5; then
+                pan_info "GlobalProtect didn't quit after SIGTERM within 5 sec."
+            fi
+        fi
+
+        #Mercy kill if processes are stuck
+        #killall -9 GlobalProtect
+        #killall -9 PanGPS
+    }
+
+    unload_kexts()
+    {
+        #unload all KEXTs
+        enforcer_loaded=0
+        kextstat -b com.paloaltonetworks.GlobalProtect.gplock | grep com.paloaltonetworks.GlobalProtect.gplock | grep -v grep > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            pan_info "Unloading enforcer"
+            enforcer_loaded=1
+            kextunload -b com.paloaltonetworks.GlobalProtect.gplock
+        fi
+        kextstat -b com.paloaltonetworks.GlobalProtect.gpsplit | grep com.paloaltonetworks.GlobalProtect.gpsplit | grep -v grep > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            pan_info "Unloading split-tunnel"
+            kextunload -b com.paloaltonetworks.GlobalProtect.gpsplit
+        fi
+        kextstat -b com.paloaltonetworks.kext.pangpd | grep com.paloaltonetworks.kext.pangpd | grep -v grep > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            pan_info "Unloading virtual adapter"
+            kextunload -b com.paloaltonetworks.kext.pangpd
+        fi
+        # pan_info "Clearing kext staging"
+		# kextcache -clear-staging
+    }
+
+    loggedInUser=$( echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
+    CONSOLE_USER=`stat -f "%Su" /dev/console`
+    CONSOLE_HOME=`eval echo ~${loggedInUser}`
+    run_as_console_user=1
+    console_user_id=`id -u ${loggedInUser}`
+    if [ -z $loggedInUser ] && [ $CONSOLE_USER = "root" ]; then
+        pan_info "preinstall run without console"
+        run_as_console_user=0
+    fi
+
+    pan_info "preinstall get current logged-in user ${loggedInUser}"
+    pan_info "preinstall run as console user ${CONSOLE_USER}"
+
+    if [ "$CONSOLE_HOME" ]; then
+        sudo -u "$CONSOLE_USER" mkdir -p "$CONSOLE_HOME/Library/Logs/PaloAltoNetworks/GlobalProtect"
+        chown "$CONSOLE_USER" "$CONSOLE_HOME/Library/Logs/PaloAltoNetworks"
+        chown -R "$CONSOLE_USER" "$CONSOLE_HOME/Library/Logs/PaloAltoNetworks/GlobalProtect"
+
+        sudo -u "$CONSOLE_USER" mkdir -p "$CONSOLE_HOME/Library/Application Support/PaloAltoNetworks/GlobalProtect/"
+        chown "$CONSOLE_USER" "$CONSOLE_HOME/Library/Application Support/PaloAltoNetworks"
+        chown -R "$CONSOLE_USER" "$CONSOLE_HOME/Library/Application Support/PaloAltoNetworks/GlobalProtect/"
+    fi
+
+    mkdir -p "/Library/Application Support/PaloAltoNetworks/GlobalProtect/"
+
+    if [ -d "${appDir}" ]; then
+
+        pan_info "preinstall unloading existing gp agent"
+        if [ $run_as_console_user -eq 1 ]; then
+            launchctl bootout gui/$console_user_id /Library/LaunchAgents/com.paloaltonetworks.gp.pangps.plist
+            launchctl bootout gui/$console_user_id /Library/LaunchAgents/com.paloaltonetworks.gp.pangpa.plist
+        else
+            launchctl remove com.paloaltonetworks.gp.pangps
+            launchctl remove com.paloaltonetworks.gp.pangpa
+        fi
+
+        pan_info "preinstall unloading existing gp daemon"
+        launchctl remove com.paloaltonetworks.gp.pangpsd
+
+        for i in {1...3}
+        do
+            wait_and_check_running_gp
+            check_gp_status
+            if [ $gp_status -eq 1 ]; then
+                pan_info "sleep 5 seconds then try again"
+                sleep 5
+            else
+                break
+            fi
+        done
+
+        ps aux | grep "/Applications/GlobalProtect.app/Contents/Resources/PanGPS" | grep -v grep > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            pan_info "PanGPS is still running, force exit"
+            killall -9 PanGPS
+        else
+            pan_info "PanGPS has stopped"
+        fi
+
+        ps aux | grep "/Applications/GlobalProtect.app/Contents/MacOS/GlobalProtect" | grep -v grep > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            pan_info "GlobalProtect is still running, force exit"
+            killall -9 GlobalProtect
+        else
+            pan_info "GlobalProtect has stopped"
+        fi
+
+        #check if agent and daemon has been removed from launchd
+        if [ $run_as_console_user -eq 1 ]; then
+            if launchctl print gui/$console_user_id/com.paloaltonetworks.gp.pangps > /dev/null 2>&1; then
+                pan_info "existing pangps agent not be removed!!!"
+            else
+                pan_info "existing pangps agent has been removed"
+            fi
+            if launchctl print gui/$console_user_id/com.paloaltonetworks.gp.pangpa > /dev/null 2>&1; then
+                pan_info "existing pangpa agent not be removed"!!!
+            else
+                pan_info "existing pangpa agent has been removed"
+            fi
+        fi
+        if launchctl print system/com.paloaltonetworks.gp.pangpsd > /dev/null 2>&1; then
+            pan_info "existing pangpsd daemon not be removed!!!"
+        else
+            pan_info "existing pangpsd agent has been removed"
+        fi
+
+        pan_info "Unloading driver"
+        for i in {1...3}
+        do
+            unload_kexts
+            check_kext_status
+            if [ $kexts_status -eq 1 ]; then
+                pan_info "sleep 5 seconds then try again"
+                sleep 5
+            else
+                break
+            fi
+        done
+
+        if [ -f $GP_INFO_PLIST ]; then
+          base_ver=5.0.9
+          GP_OLD_VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" ${GP_INFO_PLIST})
+          pan_info "GP endpoint was installed:${GP_OLD_VERSION}"
+          ver=$(echo ${GP_OLD_VERSION}| cut -d'-' -f 1)
+          pan_info "ver:${ver}"
+          result=`echo $base_ver"\n"$ver | sort -V | tail -1`
+          if [ $result == "$base_ver" ]
+          then
+            pan_info "Delete Old version GlobalProtectService"
+            security delete-generic-password -l GlobalProtectService "/Library/Keychains/System.keychain"
+            security delete-generic-password -l GlobalProtectService "/Users/${loggedInUser}/Library/Keychains/login.keychain"
+            pan_info "Delete Old version GlobalProtect"
+            security delete-generic-password -l GlobalProtect "/Users/${loggedInUser}/Library/Keychains/login.keychain"
+          fi
+        fi
+
+        pan_info "Removing ${appDir}"
+        rm -rf "${appDir}"
+        rm -rfv "/System/Library/Extensions/gplock"*.kext
+        rm -rfv "/Library/Extensions/gplock"*.kext
+        rm -rf  "/Library/Security/SecurityAgentPlugins/gplogin.bundle"
+
+        if [ $enforcer_loaded -eq 1 ]; then
+            touch ${out_dir}/enforcer.loaded
+        fi
+
+        pan_info "rm existing daemon/agent"
+        rm -f "/Library/LaunchAgents/com.paloaltonetworks.gp.pangps.plist"
+        rm -f "/Library/LaunchAgents/com.paloaltonetworks.gp.pangpa.plist"
+        rm -f "/Library/LaunchDaemons/com.paloaltonetworks.gp.pangpsd.plist"
+
+        pan_info "preinstall exit"
+    else
+      #Don't use WebGL for WebKit for the fresh installation
+      un="$(ls -dl "$CONSOLE_HOME" | awk '{print $3}')"
+      gid="$(id -g "$un")"
+      og="$un:$gid"
+      defaults write "$CONSOLE_HOME$GP_PREF_PLIST" WebKitCacheModelPreferenceKey -bool NO
+      defaults write "$CONSOLE_HOME$GP_PREF_PLIST" WebKitWebGLEnabled -bool NO
+      chown "$og" "$CONSOLE_HOME$GP_PREF_PLIST"
+      pan_info "Console user:$og Preferences:$CONSOLE_HOME$GP_PREF_PLIST"
+      pan_info "No previous installation of ${appDir} found."
+  fi
+  #Don't use WebGL for WebKit for existing users
+  for d in /Users/*; do
+    if [[ -f $d$GP_PREF_PLIST ]]; then
+      un="$(ls -l "$d$GP_PREF_PLIST" | awk '{print $3}')"
+      gid="$(id -g "$un")"
+      og="$un:$gid"
+      defaults write "$d$GP_PREF_PLIST" WebKitCacheModelPreferenceKey -bool NO
+      defaults write "$d$GP_PREF_PLIST" WebKitWebGLEnabled -bool NO
+      chown "$og" "$d$GP_PREF_PLIST"
+      pan_info "Disable WebGL for $og $d$GP_PREF_PLIST"
+    fi
+  done
+) 2>&1) >> ${out_dir}/PanGPInstall.log

@@ -1,0 +1,556 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		EB8A2EEA2F4FBEC2002FC64E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB8A2ED02F4FBEC0002FC64E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB8A2ED72F4FBEC0002FC64E;
+			remoteInfo = GlobalProtect;
+		};
+		EB8A2EF42F4FBEC2002FC64E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB8A2ED02F4FBEC0002FC64E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB8A2ED72F4FBEC0002FC64E;
+			remoteInfo = GlobalProtect;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EB8A2ED82F4FBEC0002FC64E /* GlobalProtect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlobalProtect.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB8A2EE92F4FBEC2002FC64E /* GlobalProtectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlobalProtectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB8A2EF32F4FBEC2002FC64E /* GlobalProtectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlobalProtectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		EB8A2EDA2F4FBEC0002FC64E /* GlobalProtect */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GlobalProtect;
+			sourceTree = "<group>";
+		};
+		EB8A2EEC2F4FBEC2002FC64E /* GlobalProtectTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GlobalProtectTests;
+			sourceTree = "<group>";
+		};
+		EB8A2EF62F4FBEC2002FC64E /* GlobalProtectUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GlobalProtectUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EB8A2ED52F4FBEC0002FC64E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB8A2EE62F4FBEC2002FC64E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB8A2EF02F4FBEC2002FC64E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EB8A2ECF2F4FBEC0002FC64E = {
+			isa = PBXGroup;
+			children = (
+				EB8A2EDA2F4FBEC0002FC64E /* GlobalProtect */,
+				EB8A2EEC2F4FBEC2002FC64E /* GlobalProtectTests */,
+				EB8A2EF62F4FBEC2002FC64E /* GlobalProtectUITests */,
+				EB8A2ED92F4FBEC0002FC64E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EB8A2ED92F4FBEC0002FC64E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EB8A2ED82F4FBEC0002FC64E /* GlobalProtect.app */,
+				EB8A2EE92F4FBEC2002FC64E /* GlobalProtectTests.xctest */,
+				EB8A2EF32F4FBEC2002FC64E /* GlobalProtectUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EB8A2ED72F4FBEC0002FC64E /* GlobalProtect */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB8A2EFD2F4FBEC2002FC64E /* Build configuration list for PBXNativeTarget "GlobalProtect" */;
+			buildPhases = (
+				EB8A2ED42F4FBEC0002FC64E /* Sources */,
+				EB8A2ED52F4FBEC0002FC64E /* Frameworks */,
+				EB8A2ED62F4FBEC0002FC64E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				EB8A2EDA2F4FBEC0002FC64E /* GlobalProtect */,
+			);
+			name = GlobalProtect;
+			packageProductDependencies = (
+			);
+			productName = GlobalProtect;
+			productReference = EB8A2ED82F4FBEC0002FC64E /* GlobalProtect.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EB8A2EE82F4FBEC2002FC64E /* GlobalProtectTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB8A2F002F4FBEC2002FC64E /* Build configuration list for PBXNativeTarget "GlobalProtectTests" */;
+			buildPhases = (
+				EB8A2EE52F4FBEC2002FC64E /* Sources */,
+				EB8A2EE62F4FBEC2002FC64E /* Frameworks */,
+				EB8A2EE72F4FBEC2002FC64E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB8A2EEB2F4FBEC2002FC64E /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				EB8A2EEC2F4FBEC2002FC64E /* GlobalProtectTests */,
+			);
+			name = GlobalProtectTests;
+			packageProductDependencies = (
+			);
+			productName = GlobalProtectTests;
+			productReference = EB8A2EE92F4FBEC2002FC64E /* GlobalProtectTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EB8A2EF22F4FBEC2002FC64E /* GlobalProtectUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB8A2F032F4FBEC2002FC64E /* Build configuration list for PBXNativeTarget "GlobalProtectUITests" */;
+			buildPhases = (
+				EB8A2EEF2F4FBEC2002FC64E /* Sources */,
+				EB8A2EF02F4FBEC2002FC64E /* Frameworks */,
+				EB8A2EF12F4FBEC2002FC64E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB8A2EF52F4FBEC2002FC64E /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				EB8A2EF62F4FBEC2002FC64E /* GlobalProtectUITests */,
+			);
+			name = GlobalProtectUITests;
+			packageProductDependencies = (
+			);
+			productName = GlobalProtectUITests;
+			productReference = EB8A2EF32F4FBEC2002FC64E /* GlobalProtectUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EB8A2ED02F4FBEC0002FC64E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 2620;
+				TargetAttributes = {
+					EB8A2ED72F4FBEC0002FC64E = {
+						CreatedOnToolsVersion = 26.2;
+					};
+					EB8A2EE82F4FBEC2002FC64E = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = EB8A2ED72F4FBEC0002FC64E;
+					};
+					EB8A2EF22F4FBEC2002FC64E = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = EB8A2ED72F4FBEC0002FC64E;
+					};
+				};
+			};
+			buildConfigurationList = EB8A2ED32F4FBEC0002FC64E /* Build configuration list for PBXProject "GlobalProtect" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EB8A2ECF2F4FBEC0002FC64E;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = EB8A2ED92F4FBEC0002FC64E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EB8A2ED72F4FBEC0002FC64E /* GlobalProtect */,
+				EB8A2EE82F4FBEC2002FC64E /* GlobalProtectTests */,
+				EB8A2EF22F4FBEC2002FC64E /* GlobalProtectUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EB8A2ED62F4FBEC0002FC64E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB8A2EE72F4FBEC2002FC64E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB8A2EF12F4FBEC2002FC64E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EB8A2ED42F4FBEC0002FC64E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB8A2EE52F4FBEC2002FC64E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB8A2EEF2F4FBEC2002FC64E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EB8A2EEB2F4FBEC2002FC64E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB8A2ED72F4FBEC0002FC64E /* GlobalProtect */;
+			targetProxy = EB8A2EEA2F4FBEC2002FC64E /* PBXContainerItemProxy */;
+		};
+		EB8A2EF52F4FBEC2002FC64E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB8A2ED72F4FBEC0002FC64E /* GlobalProtect */;
+			targetProxy = EB8A2EF42F4FBEC2002FC64E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		EB8A2EFB2F4FBEC2002FC64E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = W5652X7MH6;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		EB8A2EFC2F4FBEC2002FC64E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = W5652X7MH6;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		EB8A2EFE2F4FBEC2002FC64E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W5652X7MH6;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainNibFile = MainMenu;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.texastech.GlobalProtect;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		EB8A2EFF2F4FBEC2002FC64E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W5652X7MH6;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainNibFile = MainMenu;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.texastech.GlobalProtect;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		EB8A2F012F4FBEC2002FC64E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W5652X7MH6;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.texastech.GlobalProtectTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GlobalProtect.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GlobalProtect";
+			};
+			name = Debug;
+		};
+		EB8A2F022F4FBEC2002FC64E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W5652X7MH6;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.texastech.GlobalProtectTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GlobalProtect.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GlobalProtect";
+			};
+			name = Release;
+		};
+		EB8A2F042F4FBEC2002FC64E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W5652X7MH6;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.texastech.GlobalProtectUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_TARGET_NAME = GlobalProtect;
+			};
+			name = Debug;
+		};
+		EB8A2F052F4FBEC2002FC64E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W5652X7MH6;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.texastech.GlobalProtectUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_TARGET_NAME = GlobalProtect;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EB8A2ED32F4FBEC0002FC64E /* Build configuration list for PBXProject "GlobalProtect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB8A2EFB2F4FBEC2002FC64E /* Debug */,
+				EB8A2EFC2F4FBEC2002FC64E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB8A2EFD2F4FBEC2002FC64E /* Build configuration list for PBXNativeTarget "GlobalProtect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB8A2EFE2F4FBEC2002FC64E /* Debug */,
+				EB8A2EFF2F4FBEC2002FC64E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB8A2F002F4FBEC2002FC64E /* Build configuration list for PBXNativeTarget "GlobalProtectTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB8A2F012F4FBEC2002FC64E /* Debug */,
+				EB8A2F022F4FBEC2002FC64E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB8A2F032F4FBEC2002FC64E /* Build configuration list for PBXNativeTarget "GlobalProtectUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB8A2F042F4FBEC2002FC64E /* Debug */,
+				EB8A2F052F4FBEC2002FC64E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EB8A2ED02F4FBEC0002FC64E /* Project object */;
+}

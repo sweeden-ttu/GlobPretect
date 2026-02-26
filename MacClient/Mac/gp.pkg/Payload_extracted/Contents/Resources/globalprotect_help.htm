@@ -1,0 +1,296 @@
+﻿<HTML>
+<HEAD>
+<TITLE>Palo Alto Networks&#174; - GlobalProtect Help </TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="/styles/falcon_content.css?v=@@version">
+<style>
+td {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        color: black; /*#FFFFFF; */
+}
+.msg {
+    background-color: #ffff99;
+    border-width: 2px;
+    border-color: #ff0000;
+    border-style: solid;
+    padding-left: 20px;
+    padding-right: 20px;
+    max-height: 150px;
+    height: expression( this.scrollHeight > 150 ? "150px" : "auto" ); /* sets max-height for IE */
+    overflow: auto;
+}
+.alert {font-weight: bold;color: red;}
+
+/* added this style so that scrollbars will appear in the help file. This is a Chrome OS requirement. */
+
+html {
+       overflow-y: scroll;
+}
+
+
+</style>
+</HEAD>
+<BODY bgcolor="#F2F6FA">
+
+        <div align="center">
+                <h1>Palo Alto Networks<sup>&#174;</sup> - GlobalProtect Help</h1>
+        </div>
+
+<div id="formdiv">
+</div>
+<p><b>Revision Date: February 12, 2019</b></p>
+<p>The GlobalProtect&#153; app runs on your laptop, computer, or mobile endpoint to protect you with the same security policies that protect sensitive resources in your corporate network. The GlobalProtect app secures your intranet traffic and allows you to connect to your corporate network to access your company’s resources from anywhere in the world.</p>
+
+<p>The following topics describe how to use GlobalProtect:</p>
+<list>
+<li><a href="#connect">Establish the GlobalProtect Connection</a></li><br>
+<li><a href="#gateway">Connect to a Different Gateway</a></li><br>
+<li><a href="#password">Change Your Saved Password</a></li><br>
+<li><a href="#disconnect">Disconnect from GlobalProtect</a></li><br>
+<li><a href="#disable">Disable GlobalProtect</a></li><br>
+<li><a href="#troubleshoot">Troubleshoot Connection Issues</a></li><br>
+</list>
+<br>
+
+
+<h2><a name="connect">Establish the GlobalProtect Connection</a></h2>
+<p>
+The GlobalProtect app establishes a secure connection to protect you from network threats. Depending on how your administrator configures GlobalProtect, you may automatically connect as soon as you log in to your endpoint. If you do not connect automatically, you can connect manually using the following procedures:
+</p>
+<b>From a laptop</b>
+<ol>
+<li>
+Launch the GlobalProtect app by clicking the system tray icon. The status panel opens.
+</li>
+<footer><b>Note</b>: The status panel automatically closes when you click anywhere outside the panel.</footer>
+<li>
+(<tt>Optional</tt>) If you are logging in to the GlobalProtect app for the first time, enter the GlobalProtect portal address.
+</li>
+<li>
+(<tt>Optional</tt>) If multiple portals are saved on your app, select a portal from the portal drop-down. By default, the most recently connected portal is pre-selected from the portal drop-down.
+</li>
+<li>
+(<tt>Optional</tt>) By default, you are automatically connected to the <b>Best Available</b> gateway, based on the configuration that the administrator defines and the response times of the available gateways. To manually connect to a specific gateway, select the gateway from the <b>Gateway</b> drop-down (for external gateways only). 
+</li>
+<li>
+(<tt>Optional</tt>) Depending on the connection mode, click <b>Connect</b> to initiate the connection.
+</li>
+<li>
+(<tt>Optional</tt>) If prompted, enter your username and password, and then click <b>Sign In</b>.
+</li>
+</ol>
+<p>After GlobalProtect establishes the connection, the status panel displays the <b>Connected</b> or <b>Connected - Internal</b> status.</p>
+<b>From a mobile endpoint</b>
+<ol>
+<li>
+Launch the GlobalProtect app.
+</li>
+<li>
+Establish the GlobalProtect connection:
+<ul>
+<li>
+If you are logging in to the GlobalProtect app for the first time, use the following steps:
+<ol>
+<li>(<tt>Optional</tt>)(<tt>iOS only</tt>) If you have not enabled GlobalProtect notifications on your endpoint, a notification permission dialog appears. <b>Allow</b> GlobalProtect to send you notifications.</li>
+<li>Enter the GlobalProtect portal address.</li>
+<li>(<tt>Optional</tt>) Depending on the connect method, tap <b>Connect</b> to initiate the connection.</li>
+<li>(<tt>iOS only</tt>) When the "GlobalProtect Would Like to Add VPN Configurations" message appears, tap <b>Allow</b>.</li>
+<li>(<tt>Optional</tt>) If you endpoint is unable to verify the identity of the GlobalProtect portal using the portal server certificate, the "Cannot Verify Server Identity" message appears. If you trust the certificate, tap <b>Continue</b> to proceed with the connection.</li>
+<li>(<tt>Optional</tt>) If prompted, enter your <b>Username</b> and <b>Password</b>, and then <b>SIGN IN</b>.
+<li>(<tt>Android only</tt>) When the "Connection request" message appears, tap <b>OK</b> to allow GlobalProtect to set up a VPN connection on your endpoint.</li>
+<li>(<tt>Optional</tt>) If you are using multi-factor authentication, enter the GlobalProtect verification <b>Code</b> that is sent to your endpoint after you sign in, and then tap <b>Continue</b>.</li>
+</ol>
+</li>
+<li>
+If you have logged in to the GlobalProtect app before, <b>TAP TO CONNECT</b>. (Optional) If prompted, enter you username and password, and then tap <b>SIGN IN</b>.
+</li>
+</ul>
+</li>
+</ol>
+<p>After GlobalProtect establishes the connection, the home screen displays with the <b>CONNECTED</b> status.</p>
+<br>
+
+
+<h2><a name="gateway">Connect to a Different Gateway</a></h2>
+<p>If your administrator enables manual gateway selection (for external gateways only), you can switch to a different gateway using the following procedures:</p>
+<b>From a laptop</b>
+<ol>
+<li>
+Launch the GlobalProtect app by clicking the system tray icon. The status panel opens.
+</li>
+<footer><b>Note</b>: The status panel automatically closes when you click anywhere outside the panel.</footer>
+<li>
+Select a new gateway for the connection from the <b>Gateway</b> drop-down. To enable automatic gateway selection, select <b>Best Available</b> (default setting). 
+After you select a gateway, the connection initiates automatically.
+</li>
+<li>
+(<tt>Optional</tt>) If prompted, enter your username and password, and then click <b>Sign In</b>.
+</li>
+</ol>
+<b>From a mobile endpoint</b>
+<ol>
+<li>
+Launch the GlobalProtect app.
+</li>
+<li>
+From the home screen, tap the gateway drop-down to select a new gateway for the connection. To enable automatic gateway selection, select <b>Best Available</b> (default setting).
+</li>
+</ol>
+<p>After you select a gateway, the connection initiates automatically.</p>
+<br>
+
+
+<h2><a name="password">Change Your Saved Password</a></h2>
+<p>If the administrator has enabled the option to save user credentials in the GlobalProtect portal configuration, your credentials are automatically saved within GlobalProtect. You must update your credentials anytime the password you use to access the corporate network changes. If your password has changed, use the following procedures to update your password on the GlobalProtect app:</p>
+<b>From a laptop</b>
+<ol>
+<li>
+Launch the GlobalProtect app by clicking the system tray icon. The status panel opens.
+</li>
+<footer><b>Note</b>: The status panel automatically closes when you click anywhere outside the panel.</footer>
+<li>
+Click the <b>Settings</b> icon to open the <b>Settings</b> menu.
+</li>
+<li>
+Select <b>Settings</b> to open the <b>GlobalProtect Settings</b> panel.
+</li>
+<li>
+From the <b>GlobalProtect Settings</b> panel, select the <b>General</b> tab, and then click <b>Sign Out</b> to clear your saved user credentials from the GlobalProtect app.
+</li>
+<li>
+After you clear your user credentials, you can reconnect to GlobalProtect with your new username and password.
+</li>
+</ol>
+<b>From a mobile endpoint</b>
+<ol>
+<li>
+Launch the GlobalProtect app.
+</li>
+<li>
+On the home screen, <b>TAP TO CONNECT</b>.
+</li>
+<li>(<tt>Optional</tt>) If prompted, enter your <i>old</i> <b>Username</b> and <b>Password</b>, and then <b>SIGN IN</b>.</li>
+<li>When the GlobalProtect app prompts you to <b>Update Password</b>, enter your <b>Current Password</b> followed by your <b>New Password</b>.</li>
+<li><b>Retype Password</b> to confirm your new password.</li>
+<li><b>SIGN IN</b> to reconnect GlobalProtect with your new password.</li>
+</ol>
+<br>
+
+
+<h2><a name="disconnect">Disconnect from GlobalProtect</a></h2>
+<p>If your administrator configures your connection mode as <b>On-Demand</b>, you can disconnect from GlobalProtect using the following procedures:</p>
+<b>From a laptop</b>
+<p>Launch the GlobalProtect app by clicking the system tray icon. When the status panel opens, click <b>Disconnect</b>.</p>
+<footer><b>Note</b>: The status panel automatically closes when you click anywhere outside the panel.</footer>
+<br>
+<b>From a mobile endpoint</b>
+<p>Launch the GlobalProtect app. From the home screen, <b>TAP TO DISCONNECT</b>.</p>
+<br>
+
+
+<h2><a name="disable">Disable GlobalProtect</a></h2>
+<p>If your administrator configures your connection mode as <b>Always On</b>, you can disable the GlobalProtect app using the following steps.</p>
+<b>From a laptop</b>
+<ol>
+<li>
+Launch the GlobalProtect app by clicking the system tray icon. The status panel opens.
+</li>
+<footer><b>Note</b>: The status panel automatically closes when you click anywhere outside the panel.</footer>
+<li>
+Click the <b>Settings</b> icon to open the <b>Settings</b> menu.
+</li>
+<li>
+Select <b>Disable</b>, and then enter a <b>Reason</b> for disabling GlobalProtect. If you are prompted for a <b>Passcode</b> or <b>Ticket</b>, contact your administrator.
+</li>
+</ol>
+<b>From a mobile endpoint (Android only)</b>
+<ol>
+<li>Launch the GlobalProtect app.</li>
+<li>Tap the settings icon to open the settings menu.</li>
+<li>Tap <b>DISABLE</b>.</li>
+<li>Enter a reason for disabling GlobalProtect. If you are prompted for a passcode or ticket, contact your administrator.</li>
+<li>Tap <b>DISABLE</b>.</li>
+<br>
+
+
+<h2><a name="troubleshoot">Troubleshoot Connection Issues</a></h2>
+<p>If you are having trouble establishing the GlobalProtect connection, you can use the following sections to help you troubleshoot the issue:</p>
+<ul>
+<li><a href="#view">View the Connection Status</a></li><br>
+<li><a href="#logs">Send Debug Logs to Your Enterprise IT Help Desk</a></li>
+</ul>
+<h3><a name="view">View the Connection Status</a></h2>
+<p>Use the following procedures to view your GlobalProtect connection status, along with any warning or error messages:</p>
+<b>From a laptop</b>
+<p>Launch the GlobalProtect app by clicking the system tray icon. The status panel opens, displaying the connection status and any applicable warning/error messages.</p>
+<footer><b>Note</b>: The status panel automatically closes when you click anywhere outside the panel.</footer>
+<p>To view more details about the connection, including the gateway name and tunnel status, use the following steps:</p>
+<ol>
+<li>
+Launch the GlobalProtect app by clicking the system tray icon. The status panel opens.
+</li>
+<li>
+Click the <b>Settings</b> icon to open the <b>Settings</b> menu.
+</li>
+<li>
+Select <b>Settings</b> to open the <b>GlobalProtect Settings</b> panel.
+</li>
+<li>
+From the <b>GlobalProtect Settings</b> panel, select the <b>Connection</b> tab to view the connection details.
+</li>
+</ol>
+<b>From a mobile endpoint</b>
+<ol>
+<li>Launch the GlobalProtect app.</li>
+<li>Tap the settings icon to open the settings menu.</li>
+<li>Tap <b>SETTINGS</b>.</li>
+<li>Tap the connection <b>Status</b> to view the connection details.</li>
+</ol>
+<h3><a name="logs">Send Debug Logs to Your Enterprise IT Help Desk</a></h2>
+<p>By default, GlobalProtect creates debug logs to help troubleshoot issues that arise. Use the following procedures to collect and send debug logs to your IT help desk so that the issue can be identified and resolved:</p>
+<b>From a laptop</b>
+<ol>
+<li>
+Launch the GlobalProtect app by clicking the system tray icon. The status panel opens.
+</li>
+<footer><b>Note</b>: The status panel automatically closes when you click anywhere outside the panel.</footer>
+<li>
+Click the <b>Settings</b> icon to open the <b>Settings</b> menu.
+</li>
+<li>
+Select <b>Settings</b> to open the <b>GlobalProtect Settings</b> panel.
+</li>
+<li>
+From the <b>GlobalProtect Settings</b> panel, select the <b>Troubleshooting</b> tab.
+</li>
+<li>
+Select a debug level from the <b>Logging Level</b> drop-down. To collect "debug or lower" level entries, select <b>Debug</b>. To collect "dump" level entries, select <b>Dump</b>.
+</li>
+<li>
+Click <b>Collect Logs</b>. The app collects the logs in a ZIP file, which you can send to your IT help desk for troubleshooting.
+</li>
+<p><b>Note</b>: On Windows endpoints, you can also view real-time debug entries by clicking <b>Start</b> on the <b>Troubleshooting</b> tab.</p>
+</ol>
+<b>From a mobile endpoint</b>
+<ol>
+<li>
+Launch the GlobalProtect app.
+</li>
+<li>Tap the settings icon to open the settings menu.</li>
+<li>
+Tap <b>HELP</b>.
+</li>
+<li>(<tt>iOS only</tt>) <b>Send Logs</b> to your IT help desk for troubleshooting. 
+<footer><b>Note</b>: You must have an active email account in your native iOS Mail app.</footer>
+</li>
+<li>(<tt>Android only</tt>) <b>EMAIL LOGS</b> to your IT help desk for troubleshooting.
+<footer><b>Note</b>: You must have an active email account in your native Android email app.</footer></li>
+</ol>
+
+<hr>
+
+<p><b>&#169; 2017 Palo Alto Networks, Inc.</b></p>
+
+</BODY>
+</HTML>

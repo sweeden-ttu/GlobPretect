@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<installer-gui-script minSpecVersion="2">
+    <options customize="always" require-scripts="false" hostArchitectures="arm64,x86_64"/>
+    <title>GlobalProtect</title>
+    <choices-outline>
+        <line choice="default" title="GlobalProtect">
+            <line choice="com.paloaltonetworks.globalprotect.pkg"/>
+        </line>
+        <line choice="second" title="GlobalProtect">
+            <line choice="com.paloaltonetworks.globalprotect.uninstall.pkg"/>
+        </line>
+        <line choice="third" title="GlobalProtect">
+            <line choice="com.paloaltonetworks.globalprotect.systemext.pkg"/>
+        </line>
+    </choices-outline>
+    <choice id="default" title="GlobalProtect" selected="!choices.second.selected"/>
+    <choice id="com.paloaltonetworks.globalprotect.pkg" visible="false" title="GlobalProtect">
+        <pkg-ref id="com.paloaltonetworks.globalprotect.pkg"/>
+    </choice>
+    <pkg-ref id="com.paloaltonetworks.globalprotect.pkg" version="6.3.3-633" onConclusion="none" installKBytes="163668">#gp.pkg</pkg-ref>
+    <choice id="second" title="Uninstall GlobalProtect" selected="false"/>
+    <choice id="com.paloaltonetworks.globalprotect.uninstall.pkg" visible="false" title="Uninstall GlobalProtect">
+        <pkg-ref id="com.paloaltonetworks.globalprotect.uninstall.pkg"/>
+    </choice>
+    <pkg-ref id="com.paloaltonetworks.globalprotect.uninstall.pkg" version="0" onConclusion="none" installKBytes="0">#gp_uninstall.pkg</pkg-ref>
+    <choice id="third" title="GlobalProtect System extensions" selected="false"/>
+    <choice id="com.paloaltonetworks.globalprotect.systemext.pkg" visible="false" title="Enable GP System Extensions">
+        <pkg-ref id="com.paloaltonetworks.globalprotect.systemext.pkg"/>
+    </choice>
+    <pkg-ref id="com.paloaltonetworks.globalprotect.systemext.pkg" version="0" onConclusion="none" installKBytes="0">#gp_systemext.pkg</pkg-ref>
+    <allowed-os-versions>
+        <os-version min="10.10"/>
+    </allowed-os-versions>
+    <pkg-ref id="com.paloaltonetworks.globalprotect.pkg">
+        <bundle-version>
+            <bundle CFBundleShortVersionString="6.3.3-633" CFBundleVersion="1" id="com.paloaltonetworks.GlobalProtect.client.extension" path="Contents/Library/SystemExtensions/com.paloaltonetworks.GlobalProtect.client.extension.systemextension"/>
+            <bundle CFBundleShortVersionString="6.3.3" CFBundleVersion="6.3.3f633" id="com.paloaltonetworks.GlobalProtect.gpsplit" path="Contents/Resources/gpsplit.kext"/>
+            <bundle CFBundleShortVersionString="6.3.3" CFBundleVersion="6.3.3f633" id="com.paloaltonetworks.GlobalProtect.gplock" path="Contents/Resources/gplock.kext"/>
+            <bundle CFBundleShortVersionString="1.0" CFBundleVersion="1" id="com.paloaltonetworks.GlobalProtect.gplogin" path="Contents/Resources/gplogin.bundle"/>
+            <bundle CFBundleShortVersionString="6.3.3" CFBundleVersion="6.3.3f633" id="com.paloaltonetworks.kext.pangpd" path="Contents/Resources/pangpd.kext"/>
+        </bundle-version>
+    </pkg-ref>
+    <pkg-ref id="com.paloaltonetworks.globalprotect.uninstall.pkg">
+        <bundle-version/>
+    </pkg-ref>
+    <pkg-ref id="com.paloaltonetworks.globalprotect.systemext.pkg">
+        <bundle-version/>
+    </pkg-ref>
+</installer-gui-script>
